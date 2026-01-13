@@ -1,0 +1,401 @@
+import React, { useState } from 'react';
+import { ChevronRight, Users, Award } from 'lucide-react';
+
+const AccountabilityQuiz = () => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [showResult, setShowResult] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [showNameInput, setShowNameInput] = useState(true);
+
+  const questions = [
+    {
+      q: "A project you're leading misses a deadline. Your first response is:",
+      options: [
+        { text: "Email the team immediately explaining what went wrong and your plan to fix it", type: "champion", points: 5 },
+        { text: "Call a team meeting to discuss what happened and how to move forward together", type: "collaborative", points: 4 },
+        { text: "Explain to your manager all the unexpected obstacles that caused the delay", type: "defensive", points: 3 },
+        { text: "Wait to see if anyone brings it up first", type: "avoider", points: 2 }
+      ]
+    },
+    {
+      q: "A colleague points out an error you made. You:",
+      options: [
+        { text: "Thank them, apologize, and immediately correct it", type: "champion", points: 5 },
+        { text: "Acknowledge it and ask if they can help you understand what went wrong", type: "collaborative", points: 4 },
+        { text: "Explain the circumstances that led to the mistake", type: "defensive", points: 3 },
+        { text: "Feel defensive and question whether it's really that big of a deal", type: "shifter", points: 2 }
+      ]
+    },
+    {
+      q: "You realize you forgot to send an important email. You:",
+      options: [
+        { text: "Send it immediately with an apology for the delay", type: "champion", points: 5 },
+        { text: "Send it and let your team know so they can adjust if needed", type: "collaborative", points: 4 },
+        { text: "Send it and mention you've been overwhelmed with other priorities", type: "defensive", points: 3 },
+        { text: "Send it without mentioning the delay unless someone asks", type: "avoider", points: 2 }
+      ]
+    },
+    {
+      q: "Your manager asks why something didn't get done. You:",
+      options: [
+        { text: "Take full responsibility and outline your recovery plan", type: "champion", points: 5 },
+        { text: "Explain your role and ask for input on preventing this in the future", type: "collaborative", points: 4 },
+        { text: "List the reasons it was difficult to complete", type: "defensive", points: 3 },
+        { text: "Mention other team members who were also involved", type: "shifter", points: 2 }
+      ]
+    },
+    {
+      q: "A client complains about your team's work. You:",
+      options: [
+        { text: "Apologize on behalf of the team and personally ensure it's fixed", type: "champion", points: 5 },
+        { text: "Acknowledge the issue and bring the team together to address it", type: "collaborative", points: 4 },
+        { text: "Explain the constraints your team was working under", type: "defensive", points: 3 },
+        { text: "Point out which team members handled that specific part", type: "shifter", points: 2 }
+      ]
+    },
+    {
+      q: "You discover a mistake in work you submitted last week. Nobody has noticed yet. You:",
+      options: [
+        { text: "Immediately notify everyone affected and send the correction", type: "champion", points: 5 },
+        { text: "Fix it and inform your team so they're aware", type: "collaborative", points: 4 },
+        { text: "Fix it quietly and only mention it if someone asks", type: "avoider", points: 2 },
+        { text: "Wait to see if anyone notices before taking action", type: "avoider", points: 1 }
+      ]
+    },
+    {
+      q: "During a team meeting, someone blames you for a problem you contributed to. You:",
+      options: [
+        { text: "Acknowledge your part and ask how you can help fix it", type: "champion", points: 5 },
+        { text: "Agree you played a role and want to work with the team on solutions", type: "collaborative", points: 4 },
+        { text: "Point out that others were also involved in the decision", type: "shifter", points: 2 },
+        { text: "Explain the context of why you made that choice", type: "defensive", points: 3 }
+      ]
+    },
+    {
+      q: "You're running late to an important meeting. You:",
+      options: [
+        { text: "Message immediately with apology, ETA, and offer to catch up after", type: "champion", points: 5 },
+        { text: "Let them know you're running late and ask if they can start without you", type: "collaborative", points: 4 },
+        { text: "Explain what came up that made you late", type: "defensive", points: 3 },
+        { text: "Show up late without prior notice and apologize when you arrive", type: "avoider", points: 2 }
+      ]
+    },
+    {
+      q: "A process you designed isn't working well. Multiple people have complained. You:",
+      options: [
+        { text: "Thank them for feedback, own the flaws, and commit to redesigning it", type: "champion", points: 5 },
+        { text: "Acknowledge the issues and invite the team to collaborate on improvements", type: "collaborative", points: 4 },
+        { text: "Explain your original reasoning and why you thought it would work", type: "defensive", points: 3 },
+        { text: "Suggest that people might just need more time to adjust to it", type: "shifter", points: 2 }
+      ]
+    },
+    {
+      q: "You missed an important detail in a document you reviewed. You:",
+      options: [
+        { text: "Admit you missed it and take steps to prevent similar oversights", type: "champion", points: 5 },
+        { text: "Acknowledge it and ask for a second pair of eyes on similar work going forward", type: "collaborative", points: 4 },
+        { text: "Note that the document was very long and complex", type: "defensive", points: 3 },
+        { text: "Point out that others also reviewed it", type: "shifter", points: 2 }
+      ]
+    },
+    {
+      q: "Your team fails to meet a quarterly goal. In the retrospective, you:",
+      options: [
+        { text: "Start by acknowledging your role as leader and what you could have done better", type: "champion", points: 5 },
+        { text: "Facilitate an honest discussion about what everyone could improve", type: "collaborative", points: 4 },
+        { text: "Focus on external factors that made the goal difficult", type: "defensive", points: 3 },
+        { text: "Stay quiet unless specifically asked for your input", type: "avoider", points: 2 }
+      ]
+    },
+    {
+      q: "Someone asks you directly: 'Is this your fault?' when something goes wrong. You:",
+      options: [
+        { text: "Say 'Yes, I'm responsible' if you are, and explain how you'll fix it", type: "champion", points: 5 },
+        { text: "Say 'I played a part in this' and discuss the full situation", type: "collaborative", points: 4 },
+        { text: "Explain all the factors involved before answering", type: "defensive", points: 3 },
+        { text: "Say it's complicated and multiple things contributed", type: "shifter", points: 2 }
+      ]
+    },
+    {
+      q: "You promised to complete something by Friday but realize on Thursday you won't make it. You:",
+      options: [
+        { text: "Message immediately, apologize, give new realistic timeline, and explain your plan", type: "champion", points: 5 },
+        { text: "Let them know ASAP and ask if they have flexibility or need help reprioritizing", type: "collaborative", points: 4 },
+        { text: "Explain what unexpected issues arose that delayed you", type: "defensive", points: 3 },
+        { text: "Work late to try to finish it rather than admit you won't make the deadline", type: "avoider", points: 2 }
+      ]
+    },
+    {
+      q: "After a failed initiative, you're asked to present lessons learned. You:",
+      options: [
+        { text: "Lead with what you personally would do differently next time", type: "champion", points: 5 },
+        { text: "Present both team learnings and your own growth areas", type: "collaborative", points: 4 },
+        { text: "Focus mainly on unexpected circumstances that caused the failure", type: "defensive", points: 3 },
+        { text: "Present mostly systemic issues rather than individual accountability", type: "shifter", points: 2 }
+      ]
+    },
+    {
+      q: "Someone gives you critical feedback about your communication style. You:",
+      options: [
+        { text: "Thank them, reflect on specific examples, and commit to improvement", type: "champion", points: 5 },
+        { text: "Appreciate the feedback and ask for ongoing input as you work on it", type: "collaborative", points: 4 },
+        { text: "Explain your intentions and why you communicate that way", type: "defensive", points: 3 },
+        { text: "Feel hurt and question whether their perception is accurate", type: "shifter", points: 2 }
+      ]
+    }
+  ];
+
+  const accountabilityTypes = {
+    champion: {
+      title: "The Ownership Champion",
+      description: "You immediately acknowledge mistakes, proactively address issues before being asked, and focus on solutions rather than excuses. You lead by example when it comes to accountability.",
+      color: "bg-green-500",
+      icon: "🏆"
+    },
+    collaborative: {
+      title: "The Collaborative Fixer",
+      description: "You take responsibility but prefer to work through problems with team support. You value transparency and shared problem-solving, making accountability a team effort.",
+      color: "bg-blue-500",
+      icon: "🤝"
+    },
+    defensive: {
+      title: "The Defensive Deflector",
+      description: "You initially resist blame and point to external factors or others, but may eventually accept responsibility when pressed. You tend to explain circumstances before acknowledging your role.",
+      color: "bg-yellow-500",
+      icon: "🛡️"
+    },
+    avoider: {
+      title: "The Silent Avoider",
+      description: "You go quiet when issues arise and hope problems resolve themselves. You're reluctant to explicitly admit fault and prefer to let situations pass without direct confrontation.",
+      color: "bg-orange-500",
+      icon: "🙈"
+    },
+    shifter: {
+      title: "The Blame Shifter",
+      description: "You consistently redirect responsibility to others, circumstances, or systems. You rarely acknowledge your personal role in problems and focus on external attribution.",
+      color: "bg-red-500",
+      icon: "➡️"
+    }
+  };
+
+  const calculateResult = () => {
+    const typeScores = {
+      champion: 0,
+      collaborative: 0,
+      defensive: 0,
+      avoider: 0,
+      shifter: 0
+    };
+
+    answers.forEach(answer => {
+      typeScores[answer.type] += answer.points;
+    });
+
+    const maxScore = Math.max(...Object.values(typeScores));
+    const resultType = Object.keys(typeScores).find(key => typeScores[key] === maxScore);
+    
+    return resultType;
+  };
+
+  const handleAnswer = (option) => {
+    const newAnswers = [...answers, option];
+    setAnswers(newAnswers);
+
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      // Save to storage
+      saveResult(newAnswers);
+      setShowResult(true);
+    }
+  };
+
+  const saveResult = async (finalAnswers) => {
+    const typeScores = {
+      champion: 0,
+      collaborative: 0,
+      defensive: 0,
+      avoider: 0,
+      shifter: 0
+    };
+
+    finalAnswers.forEach(answer => {
+      typeScores[answer.type] += answer.points;
+    });
+
+    const maxScore = Math.max(...Object.values(typeScores));
+    const resultType = Object.keys(typeScores).find(key => typeScores[key] === maxScore);
+
+    try {
+      const timestamp = new Date().toISOString();
+      const resultData = {
+        name: userName,
+        type: resultType,
+        timestamp: timestamp,
+        answers: finalAnswers
+      };
+
+      await window.storage.set(
+        `quiz-result:${timestamp}-${userName.replace(/\s/g, '-')}`,
+        JSON.stringify(resultData),
+        false
+      );
+    } catch (error) {
+      console.error('Error saving result:', error);
+    }
+  };
+
+  const startQuiz = () => {
+    if (userName.trim()) {
+      setShowNameInput(false);
+    }
+  };
+
+  const resultType = showResult ? calculateResult() : null;
+  const result = resultType ? accountabilityTypes[resultType] : null;
+
+  if (showNameInput) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
+          <div className="text-center mb-6">
+            <Award className="w-16 h-16 mx-auto mb-4 text-indigo-600" />
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+              Accountability Styles Quiz
+            </h1>
+            <p className="text-gray-600">
+              Discover your accountability style and learn how you handle responsibility
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Enter your name to begin:
+              </label>
+              <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && startQuiz()}
+                placeholder="Your name"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              />
+            </div>
+            
+            <button
+              onClick={startQuiz}
+              disabled={!userName.trim()}
+              className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              Start Quiz
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <p className="text-sm text-gray-500 text-center">
+              15 questions • 5 minutes • Your results are private
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (showResult && result) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full">
+          <div className="text-center mb-8">
+            <div className="text-6xl mb-4">{result.icon}</div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">
+              {userName}, you are:
+            </h2>
+            <h3 className="text-2xl font-semibold text-indigo-600 mb-4">
+              {result.title}
+            </h3>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {result.description}
+            </p>
+          </div>
+
+          <div className={`${result.color} bg-opacity-10 border-l-4 ${result.color.replace('bg-', 'border-')} p-6 rounded-r-lg mb-6`}>
+            <h4 className="font-semibold text-gray-800 mb-2">What this means:</h4>
+            <p className="text-gray-700">
+              Your accountability style shapes how you respond to challenges and mistakes. 
+              Understanding your natural tendencies can help you grow and work more effectively with others.
+            </p>
+          </div>
+
+          <div className="bg-gray-50 rounded-lg p-6 mb-6">
+            <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              About Your Results
+            </h4>
+            <p className="text-sm text-gray-600">
+              Your responses have been saved privately. Only you can see your detailed results. 
+              Organization administrators can view aggregate statistics to understand overall accountability patterns.
+            </p>
+          </div>
+
+          <button
+            onClick={() => window.location.reload()}
+            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
+          >
+            Take Quiz Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-3xl w-full">
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-sm font-medium text-indigo-600">
+              Question {currentQuestion + 1} of {questions.length}
+            </span>
+            <span className="text-sm text-gray-500">
+              {userName}
+            </span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+          {questions[currentQuestion].q}
+        </h2>
+
+        <div className="space-y-3">
+          {questions[currentQuestion].options.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => handleAnswer(option)}
+              className="w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 transition-all duration-200 group"
+            >
+              <div className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 group-hover:bg-indigo-100 flex items-center justify-center font-semibold text-gray-600 group-hover:text-indigo-600">
+                  {String.fromCharCode(65 + index)}
+                </span>
+                <span className="text-gray-700 group-hover:text-gray-900">
+                  {option.text}
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AccountabilityQuiz;
