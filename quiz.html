@@ -23,7 +23,7 @@
           const [showNameInput, setShowNameInput] = useState(true);
           const [isSubmitting, setIsSubmitting] = useState(false);
 
-          const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXgnv9EPeFFUa15SAcuUWCEhuG6StKbA_KKU7cL2hjoHAsx6qW_EAsjiDeFbdR8AjVFQ/exec';
+          const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
 
           const questions = [
             {
@@ -45,15 +45,6 @@
               ]
             },
             {
-              q: "You realize you forgot to send an important email. You:",
-              options: [
-                { text: "Send it immediately with an apology for the delay", type: "champion", points: 5 },
-                { text: "Send it and let your team know so they can adjust if needed", type: "collaborative", points: 4 },
-                { text: "Send it and mention you've been overwhelmed with other priorities", type: "defensive", points: 3 },
-                { text: "Send it without mentioning the delay unless someone asks", type: "avoider", points: 2 }
-              ]
-            },
-            {
               q: "Your manager asks why something didn't get done. You:",
               options: [
                 { text: "Take full responsibility and outline your recovery plan", type: "champion", points: 5 },
@@ -69,15 +60,6 @@
                 { text: "Acknowledge the issue and bring the team together to address it", type: "collaborative", points: 4 },
                 { text: "Explain the constraints your team was working under", type: "defensive", points: 3 },
                 { text: "Point out which team members handled that specific part", type: "shifter", points: 2 }
-              ]
-            },
-            {
-              q: "You discover a mistake in work you submitted last week. Nobody has noticed yet. You:",
-              options: [
-                { text: "Immediately notify everyone affected and send the correction", type: "champion", points: 5 },
-                { text: "Fix it and inform your team so they're aware", type: "collaborative", points: 4 },
-                { text: "Fix it quietly and only mention it if someone asks", type: "avoider", points: 2 },
-                { text: "Wait to see if anyone notices before taking action", type: "avoider", points: 1 }
               ]
             },
             {
@@ -108,12 +90,12 @@
               ]
             },
             {
-              q: "You missed an important detail in a document you reviewed. You:",
+              q: "You discover a mistake in work you submitted last week. Nobody has noticed yet. You:",
               options: [
-                { text: "Admit you missed it and take steps to prevent similar oversights", type: "champion", points: 5 },
-                { text: "Acknowledge it and ask for a second pair of eyes on similar work going forward", type: "collaborative", points: 4 },
-                { text: "Note that the document was very long and complex", type: "defensive", points: 3 },
-                { text: "Point out that others also reviewed it", type: "shifter", points: 2 }
+                { text: "Immediately notify everyone affected and send the correction", type: "champion", points: 5 },
+                { text: "Fix it and inform your team so they're aware", type: "collaborative", points: 4 },
+                { text: "Fix it quietly and only mention it if someone asks", type: "avoider", points: 2 },
+                { text: "Wait to see if anyone notices before taking action", type: "avoider", points: 1 }
               ]
             },
             {
@@ -133,33 +115,6 @@
                 { text: "Explain all the factors involved before answering", type: "defensive", points: 3 },
                 { text: "Say it's complicated and multiple things contributed", type: "shifter", points: 2 }
               ]
-            },
-            {
-              q: "You promised to complete something by Friday but realize on Thursday you won't make it. You:",
-              options: [
-                { text: "Message immediately, apologize, give new realistic timeline, and explain your plan", type: "champion", points: 5 },
-                { text: "Let them know ASAP and ask if they have flexibility or need help reprioritizing", type: "collaborative", points: 4 },
-                { text: "Explain what unexpected issues arose that delayed you", type: "defensive", points: 3 },
-                { text: "Work late to try to finish it rather than admit you won't make the deadline", type: "avoider", points: 2 }
-              ]
-            },
-            {
-              q: "After a failed initiative, you're asked to present lessons learned. You:",
-              options: [
-                { text: "Lead with what you personally would do differently next time", type: "champion", points: 5 },
-                { text: "Present both team learnings and your own growth areas", type: "collaborative", points: 4 },
-                { text: "Focus mainly on unexpected circumstances that caused the failure", type: "defensive", points: 3 },
-                { text: "Present mostly systemic issues rather than individual accountability", type: "shifter", points: 2 }
-              ]
-            },
-            {
-              q: "Someone gives you critical feedback about your communication style. You:",
-              options: [
-                { text: "Thank them, reflect on specific examples, and commit to improvement", type: "champion", points: 5 },
-                { text: "Appreciate the feedback and ask for ongoing input as you work on it", type: "collaborative", points: 4 },
-                { text: "Explain your intentions and why you communicate that way", type: "defensive", points: 3 },
-                { text: "Feel hurt and question whether their perception is accurate", type: "shifter", points: 2 }
-              ]
             }
           ];
 
@@ -168,31 +123,36 @@
               title: "The Ownership Champion",
               description: "You immediately acknowledge mistakes, proactively address issues before being asked, and focus on solutions rather than excuses. You lead by example when it comes to accountability.",
               color: "bg-green-500",
-              icon: "🏆"
+              icon: "🏆",
+              growth: "While taking ownership is admirable, remember to balance self-accountability with self-compassion. Not everything requires an immediate fix, and sometimes pausing to understand systemic issues can prevent future problems. Consider inviting more collaborative input rather than shouldering everything alone."
             },
             collaborative: {
               title: "The Collaborative Fixer",
               description: "You take responsibility but prefer to work through problems with team support. You value transparency and shared problem-solving, making accountability a team effort.",
               color: "bg-blue-500",
-              icon: "🤝"
+              icon: "🤝",
+              growth: "Your inclusive approach is valuable, but be mindful of when quick individual action is needed versus when collaboration is appropriate. Sometimes waiting to involve others can delay necessary decisions. Practice being comfortable with solo accountability when the situation calls for it."
             },
             defensive: {
               title: "The Defensive Deflector",
               description: "You initially resist blame and point to external factors or others, but may eventually accept responsibility when pressed. You tend to explain circumstances before acknowledging your role.",
               color: "bg-yellow-500",
-              icon: "🛡️"
+              icon: "🛡️",
+              growth: "Your attention to context is important, but try leading with ownership before explaining circumstances. Practice saying 'I'm responsible for this' first, then discussing the factors involved. This builds trust faster and doesn't diminish the validity of external challenges you faced."
             },
             avoider: {
               title: "The Silent Avoider",
               description: "You go quiet when issues arise and hope problems resolve themselves. You're reluctant to explicitly admit fault and prefer to let situations pass without direct confrontation.",
               color: "bg-orange-500",
-              icon: "🙈"
+              icon: "🙈",
+              growth: "Addressing issues early prevents them from growing larger. Practice speaking up proactively about mistakes, even when it feels uncomfortable. Remember that most people appreciate honesty and early transparency more than they judge the mistake itself. Start with small acknowledgments to build confidence."
             },
             shifter: {
               title: "The Blame Shifter",
               description: "You consistently redirect responsibility to others, circumstances, or systems. You rarely acknowledge your personal role in problems and focus on external attribution.",
               color: "bg-red-500",
-              icon: "➡️"
+              icon: "➡️",
+              growth: "While external factors do matter, focusing solely on them can damage trust and relationships. Try asking yourself 'What was within my control?' in any situation. Even small acknowledgments of your role can significantly improve how others perceive your accountability. This doesn't mean accepting unfair blame, but recognizing your sphere of influence."
             }
           };
 
@@ -318,7 +278,7 @@
 
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <p className="text-sm text-gray-500 text-center">
-                      15 questions • 5 minutes • Anonymous results
+                      10 questions • 3 minutes • Anonymous results
                     </p>
                   </div>
                 </div>
@@ -351,9 +311,18 @@
                     </p>
                   </div>
 
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg mb-6">
+                    <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                      <span>💡</span> Growth Opportunities:
+                    </h4>
+                    <p className="text-blue-800 text-sm leading-relaxed">
+                      {result.growth}
+                    </p>
+                  </div>
+
                   {isSubmitting && (
-                    <div className="bg-blue-50 rounded-lg p-4 mb-6 text-center">
-                      <p className="text-sm text-blue-700">Saving your anonymous result...</p>
+                    <div className="bg-purple-50 rounded-lg p-4 mb-6 text-center">
+                      <p className="text-sm text-purple-700">Saving your anonymous result...</p>
                     </div>
                   )}
 
@@ -364,6 +333,13 @@
                     <p className="text-sm text-gray-600">
                       Your result has been saved anonymously. Only your accountability type (not your name) is recorded. 
                       Aggregate statistics will be shown to the group.
+                    </p>
+                  </div>
+
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+                    <p className="text-sm text-amber-800 text-center">
+                      <strong>Remember:</strong> Every accountability style has strengths and areas for growth. 
+                      No type is "better" than another - we all have opportunities to improve!
                     </p>
                   </div>
 
@@ -430,4 +406,3 @@
     </script>
 </body>
 </html>
-
