@@ -41,7 +41,7 @@
                 { text: "Thank them, apologize, and immediately correct it", type: "champion" },
                 { text: "Acknowledge it and ask if they can help you understand what went wrong", type: "collaborative" },
                 { text: "Explain the circumstances that led to the mistake", type: "defensive" },
-                { text: "Feel defensive and question whether it's really that big of a deal", type: "shifter" }
+                { text: "Point out that the instructions weren't clear or that others made similar errors", type: "shifter" }
               ]
             },
             {
@@ -49,17 +49,17 @@
               options: [
                 { text: "Take full responsibility and outline your recovery plan", type: "champion" },
                 { text: "Explain your role and ask for input on preventing this in the future", type: "collaborative" },
-                { text: "List the reasons it was difficult to complete", type: "defensive" },
-                { text: "Mention other team members who were also involved", type: "shifter" }
+                { text: "Mention other team members who were also involved", type: "shifter" },
+                { text: "Give a brief response and hope the conversation moves on", type: "avoider" }
               ]
             },
             {
               q: "A client complains about your team's work. You:",
               options: [
-                { text: "Apologize on behalf of the team and personally ensure it's fixed", type: "champion" },
                 { text: "Acknowledge the issue and bring the team together to address it", type: "collaborative" },
+                { text: "Point out which team members handled that specific part", type: "shifter" },
                 { text: "Explain the constraints your team was working under", type: "defensive" },
-                { text: "Point out which team members handled that specific part", type: "shifter" }
+                { text: "Stay quiet and let your manager handle the client communication", type: "avoider" }
               ]
             },
             {
@@ -76,7 +76,7 @@
               options: [
                 { text: "Message immediately with apology, ETA, and offer to catch up after", type: "champion" },
                 { text: "Let them know you're running late and ask if they can start without you", type: "collaborative" },
-                { text: "Explain what came up that made you late", type: "defensive" },
+                { text: "Blame traffic or an earlier meeting that ran over", type: "shifter" },
                 { text: "Show up late without prior notice and apologize when you arrive", type: "avoider" }
               ]
             },
@@ -84,9 +84,9 @@
               q: "A process you designed isn't working well. Multiple people have complained. You:",
               options: [
                 { text: "Thank them for feedback, own the flaws, and commit to redesigning it", type: "champion" },
-                { text: "Acknowledge the issues and invite the team to collaborate on improvements", type: "collaborative" },
                 { text: "Explain your original reasoning and why you thought it would work", type: "defensive" },
-                { text: "Suggest that people might just need more time to adjust to it", type: "shifter" }
+                { text: "Suggest that people might just need more time to adjust to it", type: "shifter" },
+                { text: "Become quiet in meetings when the topic comes up", type: "avoider" }
               ]
             },
             {
@@ -94,16 +94,16 @@
               options: [
                 { text: "Immediately notify everyone affected and send the correction", type: "champion" },
                 { text: "Fix it and inform your team so they're aware", type: "collaborative" },
-                { text: "Fix it quietly and only mention it if someone asks", type: "avoider" },
-                { text: "Wait to see if anyone notices before taking action", type: "avoider" }
+                { text: "Note that the original requirements were ambiguous", type: "shifter" },
+                { text: "Fix it quietly and only mention it if someone asks", type: "avoider" }
               ]
             },
             {
               q: "Your team fails to meet a quarterly goal. In the retrospective, you:",
               options: [
-                { text: "Start by acknowledging your role as leader and what you could have done better", type: "champion" },
                 { text: "Facilitate an honest discussion about what everyone could improve", type: "collaborative" },
                 { text: "Focus on external factors that made the goal difficult", type: "defensive" },
+                { text: "Mention that other departments didn't provide needed support", type: "shifter" },
                 { text: "Stay quiet unless specifically asked for your input", type: "avoider" }
               ]
             },
@@ -111,9 +111,9 @@
               q: "Someone asks you directly: 'Is this your fault?' when something goes wrong. You:",
               options: [
                 { text: "Say 'Yes, I'm responsible' if you are, and explain how you'll fix it", type: "champion" },
-                { text: "Say 'I played a part in this' and discuss the full situation", type: "collaborative" },
                 { text: "Explain all the factors involved before answering", type: "defensive" },
-                { text: "Say it's complicated and multiple things contributed", type: "shifter" }
+                { text: "Say it's complicated and multiple people contributed", type: "shifter" },
+                { text: "Give a vague answer and try to change the subject", type: "avoider" }
               ]
             }
           ];
@@ -165,27 +165,22 @@
               shifter: 0
             };
 
-            // Count frequency of each type (no points, just tallies)
             answers.forEach(answer => {
               typeCounts[answer.type]++;
             });
 
             const maxCount = Math.max(...Object.values(typeCounts));
-            
-            // Find all types with the maximum count (for tie-breaking)
             const tiedTypes = Object.keys(typeCounts).filter(key => typeCounts[key] === maxCount);
             
-            // Tie-breaker priority order
             const priorityOrder = ['champion', 'collaborative', 'defensive', 'avoider', 'shifter'];
             
-            // Return the highest priority type among tied types
             for (const type of priorityOrder) {
               if (tiedTypes.includes(type)) {
                 return type;
               }
             }
             
-            return 'champion'; // Fallback (should never reach here)
+            return 'champion';
           };
 
           const handleAnswer = (option) => {
@@ -209,7 +204,6 @@
               shifter: 0
             };
 
-            // Count frequency of each type
             finalAnswers.forEach(answer => {
               typeCounts[answer.type]++;
             });
@@ -217,7 +211,6 @@
             const maxCount = Math.max(...Object.values(typeCounts));
             const tiedTypes = Object.keys(typeCounts).filter(key => typeCounts[key] === maxCount);
             
-            // Tie-breaker priority
             const priorityOrder = ['champion', 'collaborative', 'defensive', 'avoider', 'shifter'];
             let resultType = 'champion';
             
@@ -431,4 +424,3 @@
     </script>
 </body>
 </html>
-
