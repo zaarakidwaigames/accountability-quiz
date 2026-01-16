@@ -23,97 +23,97 @@
           const [showNameInput, setShowNameInput] = useState(true);
           const [isSubmitting, setIsSubmitting] = useState(false);
 
-          const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+          const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXgnv9EPeFFUa15SAcuUWCEhuG6StKbA_KKU7cL2hjoHAsx6qW_EAsjiDeFbdR8AjVFQ/exec';
 
           const questions = [
             {
               q: "A project you're leading misses a deadline. Your first response is:",
               options: [
-                { text: "Email the team immediately explaining what went wrong and your plan to fix it", type: "champion", points: 5 },
-                { text: "Call a team meeting to discuss what happened and how to move forward together", type: "collaborative", points: 4 },
-                { text: "Explain to your manager all the unexpected obstacles that caused the delay", type: "defensive", points: 3 },
-                { text: "Wait to see if anyone brings it up first", type: "avoider", points: 2 }
+                { text: "Email the team immediately explaining what went wrong and your plan to fix it", type: "champion" },
+                { text: "Call a team meeting to discuss what happened and how to move forward together", type: "collaborative" },
+                { text: "Explain to your manager all the unexpected obstacles that caused the delay", type: "defensive" },
+                { text: "Wait to see if anyone brings it up first", type: "avoider" }
               ]
             },
             {
               q: "A colleague points out an error you made. You:",
               options: [
-                { text: "Thank them, apologize, and immediately correct it", type: "champion", points: 5 },
-                { text: "Acknowledge it and ask if they can help you understand what went wrong", type: "collaborative", points: 4 },
-                { text: "Explain the circumstances that led to the mistake", type: "defensive", points: 3 },
-                { text: "Feel defensive and question whether it's really that big of a deal", type: "shifter", points: 2 }
+                { text: "Thank them, apologize, and immediately correct it", type: "champion" },
+                { text: "Acknowledge it and ask if they can help you understand what went wrong", type: "collaborative" },
+                { text: "Explain the circumstances that led to the mistake", type: "defensive" },
+                { text: "Feel defensive and question whether it's really that big of a deal", type: "shifter" }
               ]
             },
             {
               q: "Your manager asks why something didn't get done. You:",
               options: [
-                { text: "Take full responsibility and outline your recovery plan", type: "champion", points: 5 },
-                { text: "Explain your role and ask for input on preventing this in the future", type: "collaborative", points: 4 },
-                { text: "List the reasons it was difficult to complete", type: "defensive", points: 3 },
-                { text: "Mention other team members who were also involved", type: "shifter", points: 2 }
+                { text: "Take full responsibility and outline your recovery plan", type: "champion" },
+                { text: "Explain your role and ask for input on preventing this in the future", type: "collaborative" },
+                { text: "List the reasons it was difficult to complete", type: "defensive" },
+                { text: "Mention other team members who were also involved", type: "shifter" }
               ]
             },
             {
               q: "A client complains about your team's work. You:",
               options: [
-                { text: "Apologize on behalf of the team and personally ensure it's fixed", type: "champion", points: 5 },
-                { text: "Acknowledge the issue and bring the team together to address it", type: "collaborative", points: 4 },
-                { text: "Explain the constraints your team was working under", type: "defensive", points: 3 },
-                { text: "Point out which team members handled that specific part", type: "shifter", points: 2 }
+                { text: "Apologize on behalf of the team and personally ensure it's fixed", type: "champion" },
+                { text: "Acknowledge the issue and bring the team together to address it", type: "collaborative" },
+                { text: "Explain the constraints your team was working under", type: "defensive" },
+                { text: "Point out which team members handled that specific part", type: "shifter" }
               ]
             },
             {
               q: "During a team meeting, someone blames you for a problem you contributed to. You:",
               options: [
-                { text: "Acknowledge your part and ask how you can help fix it", type: "champion", points: 5 },
-                { text: "Agree you played a role and want to work with the team on solutions", type: "collaborative", points: 4 },
-                { text: "Point out that others were also involved in the decision", type: "shifter", points: 2 },
-                { text: "Explain the context of why you made that choice", type: "defensive", points: 3 }
+                { text: "Acknowledge your part and ask how you can help fix it", type: "champion" },
+                { text: "Agree you played a role and want to work with the team on solutions", type: "collaborative" },
+                { text: "Point out that others were also involved in the decision", type: "shifter" },
+                { text: "Explain the context of why you made that choice", type: "defensive" }
               ]
             },
             {
               q: "You're running late to an important meeting. You:",
               options: [
-                { text: "Message immediately with apology, ETA, and offer to catch up after", type: "champion", points: 5 },
-                { text: "Let them know you're running late and ask if they can start without you", type: "collaborative", points: 4 },
-                { text: "Explain what came up that made you late", type: "defensive", points: 3 },
-                { text: "Show up late without prior notice and apologize when you arrive", type: "avoider", points: 2 }
+                { text: "Message immediately with apology, ETA, and offer to catch up after", type: "champion" },
+                { text: "Let them know you're running late and ask if they can start without you", type: "collaborative" },
+                { text: "Explain what came up that made you late", type: "defensive" },
+                { text: "Show up late without prior notice and apologize when you arrive", type: "avoider" }
               ]
             },
             {
               q: "A process you designed isn't working well. Multiple people have complained. You:",
               options: [
-                { text: "Thank them for feedback, own the flaws, and commit to redesigning it", type: "champion", points: 5 },
-                { text: "Acknowledge the issues and invite the team to collaborate on improvements", type: "collaborative", points: 4 },
-                { text: "Explain your original reasoning and why you thought it would work", type: "defensive", points: 3 },
-                { text: "Suggest that people might just need more time to adjust to it", type: "shifter", points: 2 }
+                { text: "Thank them for feedback, own the flaws, and commit to redesigning it", type: "champion" },
+                { text: "Acknowledge the issues and invite the team to collaborate on improvements", type: "collaborative" },
+                { text: "Explain your original reasoning and why you thought it would work", type: "defensive" },
+                { text: "Suggest that people might just need more time to adjust to it", type: "shifter" }
               ]
             },
             {
               q: "You discover a mistake in work you submitted last week. Nobody has noticed yet. You:",
               options: [
-                { text: "Immediately notify everyone affected and send the correction", type: "champion", points: 5 },
-                { text: "Fix it and inform your team so they're aware", type: "collaborative", points: 4 },
-                { text: "Fix it quietly and only mention it if someone asks", type: "avoider", points: 2 },
-                { text: "Wait to see if anyone notices before taking action", type: "avoider", points: 1 }
+                { text: "Immediately notify everyone affected and send the correction", type: "champion" },
+                { text: "Fix it and inform your team so they're aware", type: "collaborative" },
+                { text: "Fix it quietly and only mention it if someone asks", type: "avoider" },
+                { text: "Wait to see if anyone notices before taking action", type: "avoider" }
               ]
             },
             {
               q: "Your team fails to meet a quarterly goal. In the retrospective, you:",
               options: [
-                { text: "Start by acknowledging your role as leader and what you could have done better", type: "champion", points: 5 },
-                { text: "Facilitate an honest discussion about what everyone could improve", type: "collaborative", points: 4 },
-                { text: "Focus on external factors that made the goal difficult", type: "defensive", points: 3 },
-                { text: "Stay quiet unless specifically asked for your input", type: "avoider", points: 2 }
+                { text: "Start by acknowledging your role as leader and what you could have done better", type: "champion" },
+                { text: "Facilitate an honest discussion about what everyone could improve", type: "collaborative" },
+                { text: "Focus on external factors that made the goal difficult", type: "defensive" },
+                { text: "Stay quiet unless specifically asked for your input", type: "avoider" }
               ]
             },
             {
               q: "Someone asks you directly: 'Is this your fault?' when something goes wrong. You:",
               options: [
-                { text: "Say 'Yes, I'm responsible' if you are, and explain how you'll fix it", type: "champion", points: 5 },
-                { text: "Say 'I played a part in this' and discuss the full situation", type: "collaborative", points: 4 },
-                { text: "Explain all the factors involved before answering", type: "defensive", points: 3 },
-                { text: "Say it's complicated and multiple things contributed", type: "shifter", points: 2 }
+                { text: "Say 'Yes, I'm responsible' if you are, and explain how you'll fix it", type: "champion" },
+                { text: "Say 'I played a part in this' and discuss the full situation", type: "collaborative" },
+                { text: "Explain all the factors involved before answering", type: "defensive" },
+                { text: "Say it's complicated and multiple things contributed", type: "shifter" }
               ]
             }
           ];
@@ -157,7 +157,7 @@
           };
 
           const calculateResult = () => {
-            const typeScores = {
+            const typeCounts = {
               champion: 0,
               collaborative: 0,
               defensive: 0,
@@ -165,14 +165,27 @@
               shifter: 0
             };
 
+            // Count frequency of each type (no points, just tallies)
             answers.forEach(answer => {
-              typeScores[answer.type] += answer.points;
+              typeCounts[answer.type]++;
             });
 
-            const maxScore = Math.max(...Object.values(typeScores));
-            const resultType = Object.keys(typeScores).find(key => typeScores[key] === maxScore);
+            const maxCount = Math.max(...Object.values(typeCounts));
             
-            return resultType;
+            // Find all types with the maximum count (for tie-breaking)
+            const tiedTypes = Object.keys(typeCounts).filter(key => typeCounts[key] === maxCount);
+            
+            // Tie-breaker priority order
+            const priorityOrder = ['champion', 'collaborative', 'defensive', 'avoider', 'shifter'];
+            
+            // Return the highest priority type among tied types
+            for (const type of priorityOrder) {
+              if (tiedTypes.includes(type)) {
+                return type;
+              }
+            }
+            
+            return 'champion'; // Fallback (should never reach here)
           };
 
           const handleAnswer = (option) => {
@@ -188,7 +201,7 @@
           };
 
           const saveResult = async (finalAnswers) => {
-            const typeScores = {
+            const typeCounts = {
               champion: 0,
               collaborative: 0,
               defensive: 0,
@@ -196,12 +209,24 @@
               shifter: 0
             };
 
+            // Count frequency of each type
             finalAnswers.forEach(answer => {
-              typeScores[answer.type] += answer.points;
+              typeCounts[answer.type]++;
             });
 
-            const maxScore = Math.max(...Object.values(typeScores));
-            const resultType = Object.keys(typeScores).find(key => typeScores[key] === maxScore);
+            const maxCount = Math.max(...Object.values(typeCounts));
+            const tiedTypes = Object.keys(typeCounts).filter(key => typeCounts[key] === maxCount);
+            
+            // Tie-breaker priority
+            const priorityOrder = ['champion', 'collaborative', 'defensive', 'avoider', 'shifter'];
+            let resultType = 'champion';
+            
+            for (const type of priorityOrder) {
+              if (tiedTypes.includes(type)) {
+                resultType = type;
+                break;
+              }
+            }
 
             setIsSubmitting(true);
 
