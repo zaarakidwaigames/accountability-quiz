@@ -27,46 +27,46 @@
 
           const questions = [
             {
-              q: "A project you're leading misses a deadline. Your first response is:",
+              q: "A project you're leading with a small team misses a deadline. Your first response is:",
               options: [
-                { text: "Email the team immediately explaining what went wrong and your plan to fix it", type: "champion" },
+                { text: "Email the larger team immediately apologizing, and explaining your plan to fix it", type: "champion" },
                 { text: "Call a team meeting to discuss what happened and how to move forward together", type: "collaborative" },
                 { text: "Explain to your manager all the unexpected obstacles that caused the delay", type: "defensive" },
                 { text: "Wait to see if anyone brings it up first", type: "avoider" }
               ]
             },
             {
-              q: "A colleague points out an error you made. You:",
+              q: "A colleague points out an error in your team's project. You:",
               options: [
-                { text: "Thank them, apologize, and immediately correct it", type: "champion" },
                 { text: "Acknowledge it and ask if they can help you understand what went wrong", type: "collaborative" },
                 { text: "Explain the circumstances that led to the mistake", type: "defensive" },
+                { text: "Apologize, and immediately correct it", type: "champion" },
                 { text: "Point out that the instructions weren't clear or that others made similar errors", type: "shifter" }
               ]
             },
             {
               q: "Your manager asks why something didn't get done. You:",
               options: [
-                { text: "Take full responsibility and outline your recovery plan", type: "champion" },
-                { text: "Explain your role and ask for input on preventing this in the future", type: "collaborative" },
                 { text: "Mention other team members who were also involved", type: "shifter" },
-                { text: "Give a brief response and hope the conversation moves on", type: "avoider" }
+                { text: "Explain your role and ask for input on preventing this in the future", type: "collaborative" },
+                { text: "Give a brief response and hope the conversation moves on", type: "avoider" },
+                { text: "Take full responsibility and outline your recovery plan", type: "champion" }
               ]
             },
             {
               q: "A client complains about your team's work. You:",
               options: [
+                { text: "Stay quiet and let your manager handle the client communication", type: "avoider" },
                 { text: "Acknowledge the issue and bring the team together to address it", type: "collaborative" },
                 { text: "Point out which team members handled that specific part", type: "shifter" },
-                { text: "Explain the constraints your team was working under", type: "defensive" },
-                { text: "Stay quiet and let your manager handle the client communication", type: "avoider" }
+                { text: "Explain the constraints your team was working under", type: "defensive" }
               ]
             },
             {
               q: "During a team meeting, someone blames you for a problem you contributed to. You:",
               options: [
-                { text: "Acknowledge your part and ask how you can help fix it", type: "champion" },
                 { text: "Agree you played a role and want to work with the team on solutions", type: "collaborative" },
+                { text: "Acknowledge the mistake as yours and ask how you can help fix it", type: "champion" },
                 { text: "Point out that others were also involved in the decision", type: "shifter" },
                 { text: "Explain the context of why you made that choice", type: "defensive" }
               ]
@@ -74,46 +74,46 @@
             {
               q: "You're running late to an important meeting. You:",
               options: [
-                { text: "Message immediately with apology, ETA, and offer to catch up after", type: "champion" },
                 { text: "Let them know you're running late and ask if they can start without you", type: "collaborative" },
                 { text: "Blame traffic or an earlier meeting that ran over", type: "shifter" },
-                { text: "Show up late without prior notice and apologize when you arrive", type: "avoider" }
+                { text: "Show up late without prior notice and apologize when you arrive", type: "avoider" },
+                { text: "Message immediately with apology, ETA, and offer to catch up after", type: "champion" }
               ]
             },
             {
-              q: "A process you designed isn't working well. Multiple people have complained. You:",
+              q: "A process you designed with your team isn't working well. Multiple people have complained. You:",
               options: [
-                { text: "Thank them for feedback, own the flaws, and commit to redesigning it", type: "champion" },
                 { text: "Explain your original reasoning and why you thought it would work", type: "defensive" },
+                { text: "Thank them for feedback, own the flaws, and commit to redesigning it", type: "champion" },
                 { text: "Suggest that people might just need more time to adjust to it", type: "shifter" },
                 { text: "Become quiet in meetings when the topic comes up", type: "avoider" }
               ]
             },
             {
-              q: "You discover a mistake in work you submitted last week. Nobody has noticed yet. You:",
+              q: "You discover a mistake in work you submitted last week on behalf of your team. Nobody has noticed yet. You:",
               options: [
                 { text: "Immediately notify everyone affected and send the correction", type: "champion" },
-                { text: "Fix it and inform your team so they're aware", type: "collaborative" },
                 { text: "Note that the original requirements were ambiguous", type: "shifter" },
+                { text: "Fix it in the shared file and inform your team so they're aware, but keep it within your team", type: "collaborative" },
                 { text: "Fix it quietly and only mention it if someone asks", type: "avoider" }
               ]
             },
             {
               q: "Your team fails to meet a quarterly goal. In the retrospective, you:",
               options: [
+                { text: "Mention that other departments didn't provide needed support", type: "shifter" },
                 { text: "Facilitate an honest discussion about what everyone could improve", type: "collaborative" },
                 { text: "Focus on external factors that made the goal difficult", type: "defensive" },
-                { text: "Mention that other departments didn't provide needed support", type: "shifter" },
                 { text: "Stay quiet unless specifically asked for your input", type: "avoider" }
               ]
             },
             {
               q: "Someone asks you directly: 'Is this your fault?' when something goes wrong. You:",
               options: [
-                { text: "Say 'Yes, I'm responsible' if you are, and explain how you'll fix it", type: "champion" },
                 { text: "Explain all the factors involved before answering", type: "defensive" },
-                { text: "Say it's complicated and multiple people contributed", type: "shifter" },
-                { text: "Give a vague answer and try to change the subject", type: "avoider" }
+                { text: "Say 'Yes, I'm responsible' even if you are not, and explain how you'll fix it", type: "champion" },
+                { text: "Give a vague answer and try to change the subject", type: "avoider" },
+                { text: "Say it's complicated and multiple people contributed", type: "shifter" }
               ]
             }
           ];
@@ -121,7 +121,7 @@
           const accountabilityTypes = {
             champion: {
               title: "The Ownership Champion",
-              description: "You immediately acknowledge mistakes, proactively address issues before being asked, and focus on solutions rather than excuses. You lead by example when it comes to accountability.",
+              description: "You don't shy away from acknowledging mistakes, yours or the team's. Your instinct is to step up, take ownership, and focus on fixing it rather than explaining it. Accountability comes naturally to you, sometimes even before you've had a chance to think it through.",
               color: "bg-green-500",
               icon: "🏆",
               growth: "While taking ownership is admirable, remember to balance self-accountability with self-compassion. Not everything requires an immediate fix, and sometimes pausing to understand systemic issues can prevent future problems. Consider inviting more collaborative input rather than shouldering everything alone."
@@ -131,14 +131,14 @@
               description: "You take responsibility but prefer to work through problems with team support. You value transparency and shared problem-solving, making accountability a team effort.",
               color: "bg-blue-500",
               icon: "🤝",
-              growth: "Your inclusive approach is valuable, but be mindful of when quick individual action is needed versus when collaboration is appropriate. Sometimes waiting to involve others can delay necessary decisions. Practice being comfortable with solo accountability when the situation calls for it."
+              growth: "Your inclusive approach is valuable, but be mindful of when quick individual action is needed versus when collaboration is appropriate. Sometimes waiting to involve others can delay necessary decisions. Practice being comfortable with team accountability by yourself when the situation calls for it."
             },
             defensive: {
               title: "The Defensive Deflector",
               description: "You initially resist blame and point to external factors or others, but may eventually accept responsibility when pressed. You tend to explain circumstances before acknowledging your role.",
               color: "bg-yellow-500",
               icon: "🛡️",
-              growth: "Your attention to context is important, but try leading with ownership before explaining circumstances. Practice saying 'I'm responsible for this' first, then discussing the factors involved. This builds trust faster and doesn't diminish the validity of external challenges you faced."
+              growth: "Your attention to context is important, but try leading with ownership before explaining circumstances. Practice acknowledging the mistake first, before explaining the factors involved. This builds trust faster and doesn't diminish the validity of external challenges you faced."
             },
             avoider: {
               title: "The Silent Avoider",
@@ -152,7 +152,7 @@
               description: "You consistently redirect responsibility to others, circumstances, or systems. You rarely acknowledge your personal role in problems and focus on external attribution.",
               color: "bg-red-500",
               icon: "➡️",
-              growth: "While external factors do matter, focusing solely on them can damage trust and relationships. Try asking yourself 'What was within my control?' in any situation. Even small acknowledgments of your role can significantly improve how others perceive your accountability. This doesn't mean accepting unfair blame, but recognizing your sphere of influence."
+              growth: "While external factors do matter, focusing solely on them can damage trust and relationships. Even a brief 'let me look into this and get back to you' buys you the space to respond thoughtfully rather than reactively. This isn't about accepting blame that isn't yours,it's about making sure your first response protects the relationship and the team, before the explanation follows."
             }
           };
 
